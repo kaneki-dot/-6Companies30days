@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>>ans;
+    
+    
+    void helper(vector<int>&v,int k, int n,int d)
+    {
+        if(k==0)
+        {
+            if(n==0)
+                ans.push_back(v);
+            return ;
+        }
+        if(d>9)
+            return; 
+        
+        v.push_back(d);
+        helper(v,k-1,n-d,d+1);  // this call iterates the numbers having digit d 
+        v.pop_back();
+        helper(v,k,n,d+1);  // this call iterates new digit everytime when called
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int>v;
+        helper(v,k,n,1);
+        return ans;
+    }
+};
